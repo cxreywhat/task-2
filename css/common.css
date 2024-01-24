@@ -252,3 +252,17 @@ table .gray {color: #777;}
 #login_note.fade {opacity: 0;}
 
 .login_controls > div {margin-top: 25px;}
+
+.select-users-search {
+    border: rgba(0, 0, 0, 0);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0);
+    margin: 0 8px;
+}
+
+.error_message {
+    text-align: center;
+    padding: 0 16px 16px 16px;
+    color: red;
+    background-color: white;
+}

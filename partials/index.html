@@ -17,6 +17,14 @@
             {if $global.path == 'plots'}
             offset: {$offset}
             {/if}
+            
+        {literal}}{/literal}
+
+        var global = {literal}{{/literal}
+            {if $global.path == 'users'}
+            offset: {$offset}
+            {/if}
+            
         {literal}}{/literal}
     </script>
 </head>

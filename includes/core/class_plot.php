@@ -45,6 +45,7 @@ class Plot {
         // info
         $q = DB::query("SELECT plot_id, status, billing, number, size, price, base_fixed, electricity_t1, electricity_t2, updated
             FROM plots ".$where." ORDER BY number+0 LIMIT ".$offset.", ".$limit.";") or die (DB::error());
+
         while ($row = DB::fetch_row($q)) {
             $items[] = [
                 'id' => (int) $row['plot_id'],
@@ -60,7 +61,7 @@ class Plot {
                 'users' => $row['number'] ? User::users_list_plots($row['number']) : [],
                 'updated' => date('Y/m/d', $row['updated'])
             ];
-        }
+        }   
         // paginator
         $q = DB::query("SELECT count(*) FROM plots ".$where.";");
         $count = ($row = DB::fetch_row($q)) ? $row['count(*)'] : 0;

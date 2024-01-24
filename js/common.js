@@ -115,12 +115,60 @@ let common = {
 
     search_do: (act) => {
         // vars
-        let data = { search: gv('search') };
+        let data = { search: gv('search'),  selectUsers: gv('select-users') };
         let location = { dpt: 'search', act: act };
         // call
         request({location: location, data: data}, (result) => {
             html('table', result.html);
             html('paginator', result.paginator);
+        });
+    },
+
+    // users
+
+    user_delete_window: (id, e) => {
+        let data = {id: id};
+        let location = {dpt: 'user', act: 'delete_window'};
+        // call
+        request({location: location, data: data}, (result) => {
+            html('table', result.html);
+            html('paginator', result.paginator);
+        });
+    },
+
+    user_edit_window: (id, e) => {
+        // actions
+        cancel_event(e);
+        common.menu_popup_hide_all('all');
+        // vars
+        let data = {id: id};
+        let location = {dpt: 'user', act: 'edit_window'};
+        // call
+        request({location: location, data: data}, (result) => {
+            common.modal_show(400, result.html);
+        });
+    },
+
+    user_edit_update: (id = 0) => {
+        // vars
+        let data = {
+            id: id,
+            first_name: gv('first_name'),
+            last_name: gv('last_name'),
+            phone: gv('phone'),
+            plot_id: gv('plot_id'),
+            email: gv('email'),
+        };
+        let location = {dpt: 'user', act: 'edit_update'};
+        // call
+        request({location: location, data: data}, (result) => {
+            if(result.status_code == 400) {
+                document.getElementById('error_message').innerText = result.msg;
+            } 
+            else {
+                common.modal_hide();
+                html('table', result.html); 
+            }
         });
     },
 
